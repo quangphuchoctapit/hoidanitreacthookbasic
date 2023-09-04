@@ -1,8 +1,9 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import Nav from './views/Nav'
 import Todo from './views/Todo'
-import { useState } from 'react'
+import Users from './views/Users'
+import { useState, useEffect } from 'react'
 
 function App() {
   const [todo, setTodo] = useState('')
@@ -12,6 +13,10 @@ function App() {
     { id: Math.random(0, 1000), title: 'ok', type: 'ok' },
     { id: Math.random(0, 1000), title: 'ko', type: 'ko' }
   ])
+
+  useEffect(() => {
+    console.log('run useeffect')
+  })
 
   const handleOnChangeInput = e => {
     setTodo(e.target.value)
@@ -37,8 +42,9 @@ function App() {
       <header className="App-header">
         <Nav />
         <img src={logo} className="App-logo" alt="logo" />
-        <Todo todo={todo} todos={todos} handleAdd={handleAdd} handleOnChangeInput={handleOnChangeInput} handleDelete={handleDelete} />
+        {/* <Todo todo={todo} todos={todos} handleAdd={handleAdd} handleOnChangeInput={handleOnChangeInput} handleDelete={handleDelete} /> */}
         {/* <Todo todos={todos.filter(todo => todo.type === 'ok')} /> */}
+        <Users />
       </header>
     </div>
   );

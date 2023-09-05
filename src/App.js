@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [todo, setTodo] = useState('')
+  const [isOpenUsers, setIsOpenUsers] = useState(false)
   const [todos, setTodos] = useState([
     { id: Math.random(0, 1000), title: 'ok', type: 'ok' },
     { id: Math.random(0, 1000), title: 'ko', type: 'ko' },
@@ -37,14 +38,28 @@ function App() {
     setTodos(newTodos)
   }
 
+  const handleOpenUsers = () => {
+    setIsOpenUsers(true)
+  }
+  const handleCloseUsers = () => {
+    setIsOpenUsers(false)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <Nav />
         <img src={logo} className="App-logo" alt="logo" />
+        {isOpenUsers ?
+          <button onClick={handleCloseUsers}>Close</button> :
+          <button onClick={handleOpenUsers}>Users data</button>
+        }
         {/* <Todo todo={todo} todos={todos} handleAdd={handleAdd} handleOnChangeInput={handleOnChangeInput} handleDelete={handleDelete} /> */}
         {/* <Todo todos={todos.filter(todo => todo.type === 'ok')} /> */}
-        <Users />
+        {isOpenUsers === true &&
+          <Users />
+        }
+
       </header>
     </div>
   );

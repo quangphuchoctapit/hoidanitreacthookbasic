@@ -1,14 +1,7 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+// import { useState, useEffect } from 'react'
+import useFetch from '../customize/fetch'
 const Users = () => {
-
-    const [users, setUsers] = useState([])
-
-    useEffect(async () => {
-        let res = await axios.get(`https://jsonplaceholder.typicode.com/users`)
-        let data = res && res.data ? res.data : []
-        setUsers(data)
-    }, [])
+    let { users, isLoading, isError } = useFetch(`https://jsonplaceholder.typsicode.com/users`)
 
     // let { name, username, website } = users
     return (
@@ -21,7 +14,7 @@ const Users = () => {
                         <th>Website</th>
                     </tr>
                 </thead>
-                {users && users.length > 0 && users.map((user) => {
+                {isError === false && isLoading === false && users && users.length > 0 && users.map((user) => {
                     return (
                         <tbody key={user.id}>
                             <tr >
@@ -32,6 +25,9 @@ const Users = () => {
                         </tbody>
                     )
                 })}
+                {isLoading === true && <tbody><tr><td colSpan='5'>Loading...</td></tr></tbody>}
+                {isError === true && <tbody><tr><td colSpan='5'>Something wrongs...</td></tr></tbody>}
+
             </table >
         </>
     )

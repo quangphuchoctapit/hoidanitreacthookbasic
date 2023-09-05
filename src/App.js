@@ -3,11 +3,19 @@ import './App.scss';
 import Nav from './views/Nav'
 import Todo from './views/Todo'
 import Users from './views/Users'
+import { CountdownClass, CountdownHook } from './views/Countdown';
 import { useState, useEffect } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+} from "react-router-dom";
 
 function App() {
   const [todo, setTodo] = useState('')
-  const [isOpenUsers, setIsOpenUsers] = useState(false)
+  const [isTimesUp, setIsTimesUp] = useState(false)
   const [todos, setTodos] = useState([
     { id: Math.random(0, 1000), title: 'ok', type: 'ok' },
     { id: Math.random(0, 1000), title: 'ko', type: 'ko' },
@@ -38,27 +46,33 @@ function App() {
     setTodos(newTodos)
   }
 
-  const handleOpenUsers = () => {
-    setIsOpenUsers(true)
-  }
-  const handleCloseUsers = () => {
-    setIsOpenUsers(false)
+  const onTimesUp = () => {
+    setIsTimesUp(true)
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        {isOpenUsers ?
-          <button onClick={handleCloseUsers}>Close</button> :
-          <button onClick={handleOpenUsers}>Users data</button>
-        }
-        {/* <Todo todo={todo} todos={todos} handleAdd={handleAdd} handleOnChangeInput={handleOnChangeInput} handleDelete={handleDelete} /> */}
-        {/* <Todo todos={todos.filter(todo => todo.type === 'ok')} /> */}
-        {isOpenUsers === true &&
-          <Users />
-        }
+        <Router>
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
+          <Switch>
+            <Route exact={true} path="/">
+              <Users />
+            </Route>
+            <Route path="/timer">
+              {isTimesUp && <div>Time's up</div>}
+              <CountdownClass onTimesUp={onTimesUp} />
+              <span>_______________________</span>
+              <CountdownHook onTimesUp={onTimesUp} />
+            </Route>
+            <Route path="/todo">
+              <Todo todo={todo} todos={todos} handleAdd={handleAdd} handleOnChangeInput={handleOnChangeInput} handleDelete={handleDelete} />
+            </Route>
+
+          </Switch>
+
+        </Router>
 
       </header>
     </div>

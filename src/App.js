@@ -4,6 +4,7 @@ import Nav from './views/Nav'
 import Todo from './views/Todo'
 import Users from './views/Users'
 import Blogs from './views/Blogs'
+import AddBlog from './views/AddBlog'
 import DetailBlog from './views/DetailBlog'
 import { CountdownClass, CountdownHook } from './views/Countdown';
 import { useState, useEffect } from 'react'
@@ -76,6 +77,9 @@ function App() {
             </Route>
             <Route path='/blog/:id'>
               <DetailBlog />
+            </Route>
+            <Route path='/add-blog'>
+              <AddBlog />
             </Route>
           </Switch>
 

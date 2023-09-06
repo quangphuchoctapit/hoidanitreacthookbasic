@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import useFetch from '../customize/fetch'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 
 
 const Blogs = () => {
+    let redirectPage = useHistory()
     let { data: dataBlogs, isLoading, isError } = useFetch(`https://jsonplaceholder.typicode.com/posts`, true)
     let newData = []
     if (dataBlogs && dataBlogs.length > 0) {
@@ -12,8 +13,15 @@ const Blogs = () => {
 
     }
 
+    const handleAddNew = () => {
+        redirectPage.push('/add-blog')
+        console.log('useHistory: ', redirectPage)
+
+    }
     return (
         <>
+            <div><button onClick={handleAddNew} style={{ cursor: 'pointer' }}>+ Add new blog</button></div>
+
             <div className='blog-container'
                 style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}
             >

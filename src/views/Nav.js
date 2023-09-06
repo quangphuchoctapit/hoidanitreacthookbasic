@@ -8,7 +8,7 @@ const Nav = () => {
                 <NavLink to="/timer">Timer</NavLink>
                 <NavLink to="/todo">Todo app</NavLink>
                 <NavLink to='/blog'>Blog app</NavLink>
-                <NavLink to="/about">About</NavLink>
+                <NavLink to="/youtube-search">Youtube Search</NavLink>
             </div>
         </>
     )

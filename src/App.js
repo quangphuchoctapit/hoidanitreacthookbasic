@@ -7,6 +7,8 @@ import Blogs from './views/Blogs'
 import AddBlog from './views/AddBlog'
 import DetailBlog from './views/DetailBlog'
 import NotFound from './views/Notfound'
+import YoutubeSearch from './views/YoutubeSearch'
+
 import { CountdownClass, CountdownHook } from './views/Countdown';
 import { useState, useEffect } from 'react'
 import {
@@ -81,6 +83,9 @@ function App() {
             </Route>
             <Route path='/add-blog'>
               <AddBlog />
+            </Route>
+            <Route path='/youtube-search'>
+              <YoutubeSearch />
             </Route>
             <Route path='*'>
               <NotFound />

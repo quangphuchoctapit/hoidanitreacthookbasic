@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-const useFetch = (url) => {
-    const [users, setUsers] = useState([])
+const useFetch = (url, dataUsers) => {
+    const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
 
@@ -14,7 +14,7 @@ const useFetch = (url) => {
                     cancelToken: ourRequest.token
                 })
                 let data = res && res.data ? res.data : []
-                setUsers(data)
+                setData(data)
                 setIsLoading(false)
                 setIsError(false)
             }
@@ -41,7 +41,7 @@ const useFetch = (url) => {
         }
     }, [url])
     return {
-        users, isLoading, isError
+        data, isLoading, isError
     }
 }
 

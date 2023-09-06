@@ -3,6 +3,8 @@ import './App.scss';
 import Nav from './views/Nav'
 import Todo from './views/Todo'
 import Users from './views/Users'
+import Blogs from './views/Blogs'
+import DetailBlog from './views/DetailBlog'
 import { CountdownClass, CountdownHook } from './views/Countdown';
 import { useState, useEffect } from 'react'
 import {
@@ -24,7 +26,7 @@ function App() {
   ])
 
   useEffect(() => {
-    console.log('run useeffect')
+    // console.log('run useeffect')
   })
 
   const handleOnChangeInput = e => {
@@ -69,7 +71,12 @@ function App() {
             <Route path="/todo">
               <Todo todo={todo} todos={todos} handleAdd={handleAdd} handleOnChangeInput={handleOnChangeInput} handleDelete={handleDelete} />
             </Route>
-
+            <Route path='/blog' exact>
+              <Blogs />
+            </Route>
+            <Route path='/blog/:id'>
+              <DetailBlog />
+            </Route>
           </Switch>
 
         </Router>

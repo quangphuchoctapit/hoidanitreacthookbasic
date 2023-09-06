@@ -3,8 +3,7 @@ import useFetch from '../customize/fetch'
 const Users = (props) => {
     const [isOpenUsers, setIsOpenUsers] = useState(false)
 
-    let { users, isLoading, isError } = useFetch(`https://jsonplaceholder.typicode.com/users`)
-
+    let { data: users, isLoading, isError } = useFetch(`https://jsonplaceholder.typicode.com/users`, true)
     // const toggleUsers = () => {
     //     props.toggleUsers()
     // }

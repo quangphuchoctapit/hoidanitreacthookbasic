@@ -1,14 +1,36 @@
 import { useState } from 'react'
-const AddBlog = () => {
+import axios from 'axios'
+
+const AddBlog = (props) => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
-    const handleSubmit = () => {
-        console.log('>> check submit: ', title, content)
+    const handleSubmit = async () => {
+        if (!title) {
+            alert('empty title!')
+            return
+        }
+        if (!content) {
+            alert('empty content!')
+            return
+        }
+
+        let data = {
+            title: title,
+            body: content,
+            id: 1,
+            userId: 101
+        }
+        let res = await axios.post('https://jsonplaceholder.typicode.com/posts', data)
+        if (res && res.data) {
+            let newBlog = res.data
+            props.handleAddNew(newBlog)
+            // console.log('>> check res: ', res.data)
+        }
+        // console.log('>> check submit: ', title, content)
     }
     return (
         <>
-            <div className="container" style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', width: '40vw', padding: '20px', border: '1px solid grey' }}>
-                <div className='title'>Add New Blog</div>
+            <div className="container" style={{ width: '100% !important', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', padding: '20px', border: '1px solid grey' }}>
                 <div className='content-container' style={{ textAlign: 'start', margin: '10px 0', width: '100%' }}>
                     <div className="title-container" style={{ margin: '10px 0' }}>
                         <label htmlFor="title">Title: </label>
